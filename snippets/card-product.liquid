@@ -123,6 +123,7 @@
                 {{ card_product.title | escape }}
               </a>
             </h3>
+            
           </div>
           <div class="card__badge {{ settings.badge_position }}">
             {%- if card_product.available == false -%}
@@ -140,8 +141,10 @@
                 {{- 'products.product.on_sale' | t -}}
               </span>
             {%- endif -%}
+             
           </div>
         </div>
+        
       </div>
       <div class="card__content">
         <div class="card__information">

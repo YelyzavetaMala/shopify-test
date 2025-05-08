@@ -11,6 +11,14 @@
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
+    
+    {% comment %}
+  Це банер для показу інформації про безкоштовну доставку.
+  Додано як кастомний екстеншен для тестового завдання.
+{% endcomment %}
+
+    {% render 'promo-banner' %}
+
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
@@ -372,5 +380,11 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    {% comment %}
+      Підключаю створений файл wishlist.js
+    {% endcomment %}
+
+    <script src="{{ 'wishlist.js' | asset_url }}"></script>
   </body>
 </html>
