@@ -3,13 +3,28 @@
 {% endcomment %}
 
 {% layout 'theme' %}
-
-<div class="page-width">
-  <h1 class="title">Cписок бажаного</h1>
-  <div id="wishlist-container" class="grid grid--2-col-tablet-down grid--4-col-desktop">
-    <!-- Сюди будуть додаватись товари з localStorage -->
-  </div>
+<div class="wishlist-container">
+  <h1>Список бажаного</h1>
+  <ul id="wishlist-items"></ul>
 </div>
 
-<script src="{{ 'wishlist.js' | asset_url }}" defer></script>
-<link rel="stylesheet" href="{{ 'wishlist.css' | asset_url }}">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const container = document.getElementById("wishlist-items");
+
+    if (wishlist.length === 0) {
+      container.innerHTML = "<li>Список бажаного порожній.</li>";
+      return;
+    }
+
+    wishlist.forEach(item => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <strong>${item.title}</strong> 
+        <br><a href="/products/${item.handle}">Перейти до товару</a>
+      `;
+      container.appendChild(li);
+    });
+  });
+</script>
