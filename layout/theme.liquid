@@ -384,7 +384,6 @@
     {% comment %}
       Підключаю створений файл wishlist.js
     {% endcomment %}
-
-    <script src="{{ 'wishlist.js' | asset_url }}"></script>
+   {{ 'wishlist.js' | asset_url | script_tag }}
   </body>
 </html>

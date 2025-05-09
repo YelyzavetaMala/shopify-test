@@ -21,6 +21,10 @@
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
 {% endcomment %}
 {%- unless skip_styles -%}
+{% comment %}
+  Підключила стилі кнопки "Додати до списку бажаного"
+{% endcomment %}
+  {{ 'wishlist.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
 
@@ -124,6 +128,12 @@
               </a>
             </h3>
             
+    {% comment %}
+      додала кнопку до картки товару
+    {% endcomment %}
+            <button class="wishlist-button" data-product-id="{{ card_product.id }}" data-product-title="{{ card_product.title }}">
+              &#10084;&#65039; Додати до списку бажаного
+            </button>
           </div>
           <div class="card__badge {{ settings.badge_position }}">
             {%- if card_product.available == false -%}
@@ -163,6 +173,12 @@
               {{ card_product.title | escape }}
             </a>
           </h3>
+             {% comment %}
+      додала кнопку до картки товару
+    {% endcomment %}
+            <button class="wishlist-button" data-product-id="{{ card_product.id }}" data-product-title="{{ card_product.title }}">
+              &#10084;&#65039; Додати до списку бажаного
+            </button>
           <div class="card-information">
             {%- if show_vendor -%}
               <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
@@ -613,6 +629,12 @@
               {{ 'onboarding.product_title' | t }}
             </a>
           </h3>
+             {% comment %}
+      додала кнопку до картки товару
+    {% endcomment %}
+            <button class="wishlist-button" data-product-id="{{ card_product.id }}" data-product-title="{{ card_product.title }}">
+              &#10084;&#65039; Додати до списку бажаного
+            </button>
           <div class="card-information">
             {%- if show_vendor -%}
               <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>

@@ -1,0 +1,18 @@
+/*Стилі кнопки "Додати до списку бажаного"*/
+
+.wishlist-button {
+  color: #000000;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 5;
+  position: relative;
+  font-size: 14px;
+  margin-top: 8px;
+  transition: color 0.2s;
+  background-color: rgb(255, 223, 245);
+  border: 1px solid #818181d0;
+  border-radius: 15px;
+}
+.wishlist-button:hover {
+  color: #ff6687;
+}

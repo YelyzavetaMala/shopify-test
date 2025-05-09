@@ -1,14 +1,25 @@
-/*створила новий js-файл */
+/*створила новий js-файл для додавання товару у wishlist*/
 
-function addToWishlist(button) {
-  const handle = button.dataset.productHandle;
-  let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+document.addEventListener('DOMContentLoaded', function () {
+  const wishlistButtons = document.querySelectorAll('.wishlist-button');
 
-  if (!wishlist.includes(handle)) {
-    wishlist.push(handle);
-    localStorage.setItem('wishlist', JSON.stringify(wishlist));
-    alert('Додано в бажане!');
-  } else {
-    alert('Цей товар вже є у списку бажаного!');
-  }
-}
+  wishlistButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const productId = button.dataset.productId;
+      const productTitle = button.dataset.productTitle;
+
+      // Отримую поточний список
+      let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+      // Перевіряю чи товар вже доданий
+      const exists = wishlist.find((item) => item.id === productId);
+      if (!exists) {
+        wishlist.push({ id: productId, title: productTitle });
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        alert(`Додано "${productTitle}" до списку бажаного!`);
+      } else {
+        alert(`"${productTitle}" вже у списку бажаного!`);
+      }
+    });
+  });
+});
