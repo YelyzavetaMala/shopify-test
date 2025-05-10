@@ -16,3 +16,8 @@
 .wishlist-button:hover {
   color: #ff6687;
 }
+
+.wishlist-link {
+  color: #ffffff;
+  font-weight: bold;
+}

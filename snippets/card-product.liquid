@@ -131,9 +131,14 @@
     {% comment %}
       додала кнопку до картки товару
     {% endcomment %}
-            <button class="wishlist-button" data-product-id="{{ card_product.id }}" data-product-title="{{ card_product.title }}" data-product-handle="{{ card_product.handle }}">
-              &#10084;&#65039; Додати до списку бажаного
-            </button>
+            {% if card_product.title and card_product.handle %}
+  <button class="wishlist-button"
+  data-product-id="{{ card_product.id }}"
+  data-product-title="{{ card_product.title | default: 'Тестовий товар ' }}"
+  data-product-handle="{{ card_product.handle | default: 'test-product' }}">
+    ❤️ Додати до списку бажаного
+  </button>
+{% endif %}
           </div>
           <div class="card__badge {{ settings.badge_position }}">
             {%- if card_product.available == false -%}
@@ -173,12 +178,6 @@
               {{ card_product.title | escape }}
             </a>
           </h3>
-             {% comment %}
-      додала кнопку до картки товару
-    {% endcomment %}
-            <button class="wishlist-button" data-product-id="{{ card_product.id }}" data-product-title="{{ card_product.title }}" data-product-handle="{{ card_product.handle }}">
-              &#10084;&#65039; Додати до списку бажаного
-            </button>
           <div class="card-information">
             {%- if show_vendor -%}
               <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
@@ -629,12 +628,13 @@
               {{ 'onboarding.product_title' | t }}
             </a>
           </h3>
-             {% comment %}
-      додала кнопку до картки товару
-    {% endcomment %}
-           <button class="wishlist-button" data-product-id="{{ card_product.id }}" data-product-title="{{ card_product.title }}" data-product-handle="{{ card_product.handle }}">
-              &#10084;&#65039; Додати до списку бажаного
-            </button>
+            <button
+  class="wishlist-button"
+  data-product-id="test-id-3"
+  data-product-title="Тестовий товар"
+  data-product-handle="test-product">
+  ❤️ Додати до списку бажаного
+</button>
           <div class="card-information">
             {%- if show_vendor -%}
               <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>

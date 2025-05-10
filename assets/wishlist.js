@@ -1,20 +1,26 @@
 /*створила новий js-файл для додавання товару у wishlist*/
 
 document.querySelectorAll('.wishlist-button').forEach((button) => {
-  button.addEventListener('click', () => {
-    const product = {
-      id: button.dataset.productId,
-      title: button.dataset.productTitle,
-      handle: button.dataset.productHandle,
-    };
+  button.addEventListener('click', function () {
+    const id = this.dataset.productId;
+    const title = this.dataset.productTitle;
+    const handle = this.dataset.productHandle;
 
-    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    // Перевірка на порожні значення
+    if (!title || !handle) {
+      console.warn('Пропущено товар через відсутність title або handle');
+      return;
+    }
 
-    // перевірка чи вже є
-    const exists = wishlist.some((item) => item.id === product.id);
+    const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+    const exists = wishlist.some((item) => item.handle === handle);
     if (!exists) {
-      wishlist.push(product);
+      wishlist.push({ id, title, handle });
       localStorage.setItem('wishlist', JSON.stringify(wishlist));
+      alert('Товар додано до списку бажаного!');
+    } else {
+      alert('Товар вже у списку бажаного!');
     }
   });
 });
