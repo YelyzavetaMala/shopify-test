@@ -1,0 +1,30 @@
+{% comment %}
+  Template for Wishlist page
+{% endcomment %}
+
+{% layout 'theme' %}
+<div class="wishlist-container">
+ 
+  <ul id="wishlist-items"></ul>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const container = document.getElementById("wishlist-items");
+
+    if (wishlist.length === 0) {
+      container.innerHTML = "<li>Список бажаного порожній.</li>";
+      return;
+    }
+
+    wishlist.forEach(item => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <strong>${item.title}</strong> 
+        <br><a href="/products/${item.handle}">Перейти до товару</a>
+      `;
+      container.appendChild(li);
+    });
+  });
+</script>

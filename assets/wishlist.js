@@ -1,25 +1,20 @@
 /*створила новий js-файл для додавання товару у wishlist*/
 
-document.addEventListener('DOMContentLoaded', function () {
-  const buttons = document.querySelectorAll('.wishlist-button');
+document.querySelectorAll('.wishlist-button').forEach((button) => {
+  button.addEventListener('click', () => {
+    const product = {
+      id: button.dataset.productId,
+      title: button.dataset.productTitle,
+      handle: button.dataset.productHandle,
+    };
 
-  buttons.forEach((button) => {
-    button.addEventListener('click', function () {
-      const productId = this.dataset.productId;
-      const productTitle = this.dataset.productTitle;
-      const productHandle = this.closest('a')?.getAttribute('href')?.replace('/products/', '') || '';
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
 
-      let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-
-      // Уникнення дублів
-      const exists = wishlist.some((item) => item.id === productId);
-      if (!exists) {
-        wishlist.push({ id: productId, title: productTitle, handle: productHandle });
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-        alert('Додано до списку бажаного!');
-      } else {
-        alert('Товар вже в списку бажаного');
-      }
-    });
+    // перевірка чи вже є
+    const exists = wishlist.some((item) => item.id === product.id);
+    if (!exists) {
+      wishlist.push(product);
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    }
   });
 });
